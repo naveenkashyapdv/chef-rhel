@@ -1,45 +1,66 @@
 RHEL Cookbook
 =============
-Provides a RHEL subscription manager resource
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Provides resources for subscription management
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+- `RHEL` - 7.0
 
-e.g.
 #### packages
-- `toaster` - rhel needs toaster to brown your bagel.
+- `subscription-manager`
 
-Attributes
-----------
-TODO: List your cookbook attributes here.
+Resource/Provider
+-----------------
 
-e.g.
-#### rhel::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['rhel']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+### rhel_registration
+
+#### actions
+
+- **register** - registers the node
+- **unregister** - unregisters the node
+
+#### attributes
+
+- **proxy** - String - proxy url
+- **proxyuser** - String -proxy user
+- **proxypassword** - String - proxy password
+- **hostname** - String - system name
+- **username** - String -username for submanagement auth
+- **password** - String - password for submanagement auth
+- **serverurl** - String - server url
+- **insecure** - Boolean - do not check server ssl
+- **baseurl** - String -base url for content
+- **type** - String - type of unit to register
+- **org** - String - org key
+- **environment** - String - environment in org
+- **release** - Strin - release version
+- **auto_attach** - Boolean - sets --auto-attach flag
+- **force** - Boolean - sets --force flag
+- **activationkey** - String - activation key to use
+- **servicelevel** - String - system preference when subscribing
+
+### rhel_subscription
+
+#### actions
+
+- **attach** - attaches the subscription
+- **remove** - removes the subscription
+
+#### attributes
+
+- **proxy** - String - proxy url
+- **proxyuser** - String - proxy user
+- **proxypassword** - String - proxy password
+- **pool** - Array - 1 or more ids for subscriptions
+- **quantity** - Integer - number of subscriptions to attach
+- **auto** - Boolean - automatically attach the best match
+- **serial** - Array - one or more serials to use with remove
+- **servicelevel** - sets the service level to use for subscriptions
+- **all** - remove all subscriptions
 
 Usage
 -----
 #### rhel::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
 Just include `rhel` in your node's `run_list`:
 
 ```json
@@ -53,9 +74,6 @@ Just include `rhel` in your node's `run_list`:
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
@@ -65,4 +83,28 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+- Author:: Jim Rosser(jarosser06@gmail.com)
+
+```text
+copyright (C) 2014 Jim Rosser
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the “Software”), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+```
