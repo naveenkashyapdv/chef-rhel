@@ -58,20 +58,6 @@ Resource/Provider
 - **servicelevel** - sets the service level to use for subscriptions
 - **all** - remove all subscriptions
 
-Usage
------
-#### rhel::default
-Just include `rhel` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[rhel]"
-  ]
-}
-```
-
 Contributing
 ------------
 1. Fork the repository on Github
