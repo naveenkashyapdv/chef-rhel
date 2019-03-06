@@ -25,7 +25,6 @@ module Rhel
         false
       end
     end
-   end
 
     def sub_management(mod, options=nil)
       command = @@subscription_manager + ' ' + mod + ' ' + options
