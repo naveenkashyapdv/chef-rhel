@@ -19,7 +19,7 @@ module Rhel
     def registered?
       command = @@subscription_manager + ' identity'
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
-      if shellout.exitstatus == 0
+      if shellout.exitstatus == 0 || registered_with_rhsm?
         true
       else
         false
@@ -31,7 +31,7 @@ module Rhel
       Chef::Log.debug("Running command #{command} as root")
 
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
-      unless shellout.stderr.empty? || registered_with_rhsm?
+      unless shellout.stderr.empty?
         Chef::Application.fatal! "subscription-manager returned error #{shellout.stderr}"
       end
     end
