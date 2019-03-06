@@ -29,7 +29,7 @@ module Rhel
     end
 
     def sub_management(mod, options=nil)
-      command = @@subscription_manager + ' ' + mod + ' ' + options
+      command = @@subscription_manager + ' ' + mod + ' ' + options + [0, 1]
       Chef::Log.debug("Running command #{command} as root")
 
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
