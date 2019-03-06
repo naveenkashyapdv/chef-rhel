@@ -4,6 +4,7 @@ require 'chef'
 module Rhel
   module Helpers
     @@subscription_manager = '/usr/bin/subscription-manager'
+    property :return_codes, Array, default: [0, 1]
 
     # takes array of strings and returns an array of formatted options
     # using the resource attributes
@@ -17,6 +18,7 @@ module Rhel
     end
 
     def registered?
+      
       command = @@subscription_manager + ' identity'
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
       if shellout.exitstatus == 0 
