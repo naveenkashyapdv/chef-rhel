@@ -19,7 +19,7 @@ module Rhel
     def registered?
       command = @@subscription_manager + ' identity'
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
-      if shellout.exitstatus == 0 || registered?
+      if shellout.exitstatus == 0 
         true
       else
         false
