@@ -20,15 +20,13 @@ class Chef
       def username(arg=nil)
         set_or_return(:username,
                       arg,
-                      kind_of: String,
-                      required: true)
+                      kind_of: String)
       end
 
       def password(arg=nil)
         set_or_return(:password,
                       arg,
-                      kind_of: String,
-                      required: true)
+                      kind_of: String)
       end
 
       def serverurl(arg=nil)
