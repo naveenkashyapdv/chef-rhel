@@ -34,7 +34,7 @@ module Rhel
       if shellout.stderr == 1
         true
        else
-        Chef::Log.warn("subscription-manager returned error #{shellout.stderr}")
+        Chef::Log.info("subscription-manager returned error #{shellout.stderr}")
 #        Chef::Application.fatal! "subscription-manager returned error #{shellout.stderr}"
       end
     end
