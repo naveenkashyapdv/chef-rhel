@@ -26,8 +26,9 @@ module Rhel
       end
     end
 
-    unless shell_cmd.valid_exit_codes.should == [0,1] 
+ 
     def sub_management(mod, options=nil)
+      unless shell_cmd.valid_exit_codes.should == [1]
       command = @@subscription_manager + ' ' + mod + ' ' + options
       Chef::Log.debug("Running command #{command} as root")
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
