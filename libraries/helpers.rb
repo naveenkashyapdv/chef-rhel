@@ -28,11 +28,12 @@ module Rhel
 
  
     def sub_management(mod, options=nil)
-      unless shellout.valid_exit_codes == [1]
       command = @@subscription_manager + ' ' + mod + ' ' + options
-      Chef::Log.debug("Running command #{command} as root")
+      #Chef::Log.debug("Running command #{command} as root")
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
-      #unless shellout.stderr.empty?
+      if shellout.exitstatus == 1
+        true
+       else
         Chef::Application.fatal! "subscription-manager returned error #{shellout.stderr}"
       end
     end
