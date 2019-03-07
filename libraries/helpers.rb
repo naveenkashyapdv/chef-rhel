@@ -33,7 +33,7 @@ module Rhel
 
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
       unless shellout.stderr.empty?
-         Chef::Log.info("subscription-manager returned error #{shellout.stderr}")
+         Chef::Log.warn("subscription-manager returned error #{shellout.stderr}")
       end
     end
   end
