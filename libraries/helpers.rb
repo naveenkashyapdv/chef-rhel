@@ -31,10 +31,11 @@ module Rhel
       command = @@subscription_manager + ' ' + mod + ' ' + options
       #Chef::Log.debug("Running command #{command} as root")
       shellout = Mixlib::ShellOut.new(command, user: 'root').run_command
-      if shellout.stderr == registered?
+      if shellout.stderr == 1
         true
        else
-        Chef::Application.fatal! "subscription-manager returned error #{shellout.stderr}"
+        Chef::Log.warn("subscription-manager returned error #{shellout.stderr}")
+#        Chef::Application.fatal! "subscription-manager returned error #{shellout.stderr}"
       end
     end
   end
